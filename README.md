@@ -126,3 +126,8 @@ To filter fastq based on length (here larger than or equal to 21, but smaller th
 ```
 cat your.fastq | paste - - - - | awk 'length($2)  >= 21 && length($2) <= 25' | sed 's/\t/\n/g' > filtered.fastq
 ```
+To extract fasta sequences based on a file with ids:
+
+```
+perl -ne 'if(/^>(\S+)/){$c=$i{$1}}$c?print:chomp;$i{$_}=1 if @ARGV' ids_of_seqs_to_extract.txt all_sequences.fasta > extracted_sequences.fasta
+```
