@@ -103,6 +103,10 @@ To extract fasta sequences based on a file with ids:
 ```
 perl -ne 'if(/^>(\S+)/){$c=$i{$1}}$c?print:chomp;$i{$_}=1 if @ARGV' ids_of_seqs_to_extract.txt all_sequences.fasta > extracted_sequences.fasta
 ```
+To remove line breaks in a fasta file (to have one sequence per line)
+```
+awk '!/^>/ { printf "%s", $0; n = "\n" } /^>/ { print n $0; n = "" } END { printf "%s", n }' input.fasta > output.fasta
+```
 
 **Working with any text files**
 
